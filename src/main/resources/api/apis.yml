@@ -1,0 +1,23 @@
+openapi: 3.0.3
+info:
+  description: APIs to be consumed for portfolio transfer bffe
+  title: Portfolio transfer backend
+  version: 0.0.1
+tags:
+  - name: price-controller
+    description: \uD83C\uDF31 Event Test
+
+paths:
+  /api/price:
+    $ref: './price-apis.yml#/price'
+  /api/price-list:
+    $ref: './price-apis.yml#/price-list'
+
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

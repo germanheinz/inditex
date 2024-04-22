@@ -1,8 +1,14 @@
 package com.inditex.germanheinz.demo.service.impl;
 
+import com.inditex.germanheinz.demo.controller.PriceController;
 import com.inditex.germanheinz.demo.entity.Price;
+//import com.inditex.germanheinz.demo.mapper.PriceMapper;
+import com.inditex.germanheinz.demo.mapper.PriceMapper;
+import com.inditex.germanheinz.demo.model.PriceDto;
 import com.inditex.germanheinz.demo.repository.PriceRepository;
 import com.inditex.germanheinz.demo.service.PriceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,13 +16,24 @@ import java.util.List;
 @Service
 public class PriceServiceImpl implements PriceService {
 
-    private PriceRepository priceRepository;
+    Logger logger = LoggerFactory.getLogger(PriceServiceImpl.class);
 
-    public PriceServiceImpl(PriceRepository priceRepository) {
+    private PriceRepository priceRepository;
+    private PriceMapper priceMapper;
+
+    public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper) {
         this.priceRepository = priceRepository;
+        this.priceMapper = priceMapper;
     }
+
     @Override
-    public List<Price> getPrices() {
-        return priceRepository.findAll();
+    public List<PriceDto> getPrices() {
+        List<Price> prices = priceRepository.findAll();
+        logger.info("Get Prices from DB {}", prices);
+
+        return priceMapper.pricesToPricesDto(prices);
+
+//         Optional<Price> price = priceRepository.findById(1L);
+//        logger.info("Get Prices By Id from DB {}", price);
     }
 }
