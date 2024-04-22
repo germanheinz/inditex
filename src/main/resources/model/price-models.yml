@@ -1,0 +1,42 @@
+components:
+  schemas:
+    PriceDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        brand:
+          $ref: '#/components/schemas/Brand'
+        startDate:
+          type: string
+        endDate:
+          type: string
+        priceList:
+          type: integer
+        productId:
+          type: integer
+        priority:
+          type: integer
+        price:
+          type: number
+        curr:
+          type: string
+      required:
+        - id
+
+    Brand:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+      required:
+        - id
+        -
+    PriceListDto:
+      type: array
+      items:
+        $ref: '#/components/schemas/PriceDto'

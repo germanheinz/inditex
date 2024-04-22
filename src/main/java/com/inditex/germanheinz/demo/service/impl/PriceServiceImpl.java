@@ -1,8 +1,6 @@
 package com.inditex.germanheinz.demo.service.impl;
 
-import com.inditex.germanheinz.demo.controller.PriceController;
 import com.inditex.germanheinz.demo.entity.Price;
-//import com.inditex.germanheinz.demo.mapper.PriceMapper;
 import com.inditex.germanheinz.demo.mapper.PriceMapper;
 import com.inditex.germanheinz.demo.model.PriceDto;
 import com.inditex.germanheinz.demo.repository.PriceRepository;
@@ -32,8 +30,5 @@ public class PriceServiceImpl implements PriceService {
         logger.info("Get Prices from DB {}", prices);
 
         return priceMapper.pricesToPricesDto(prices);
-
-//         Optional<Price> price = priceRepository.findById(1L);
-//        logger.info("Get Prices By Id from DB {}", price);
     }
 }

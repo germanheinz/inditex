@@ -11,7 +11,7 @@ price-list:
         content:
           application/json:
             schema:
-              $ref: '../model/allocation.yml#/components/schemas/PriceListDto'
+              $ref: '../model/price-models.yml#/components/schemas/PriceListDto'
       '401':
         description: Unauthorized
         content:
@@ -42,14 +42,14 @@ price:
       content:
         application/json:
           schema:
-            $ref: '../model/allocation.yml#/components/schemas/PriceListDto'
+            $ref: '../model/price-models.yml#/components/schemas/PriceListDto'
     responses:
       '200':
         description: Transfer
         content:
           application/json:
             schema:
-              $ref: '../model/allocation.yml#/components/schemas/PriceDto'
+              $ref: '../model/price-models.yml#/components/schemas/PriceDto'
       '404':
         description: Not found
         content:
