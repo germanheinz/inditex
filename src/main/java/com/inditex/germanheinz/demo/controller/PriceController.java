@@ -3,6 +3,7 @@ package com.inditex.germanheinz.demo.controller;
 
 import com.inditex.germanheinz.demo.api.PriceControllerApi;
 import com.inditex.germanheinz.demo.model.PriceDto;
+import com.inditex.germanheinz.demo.model.PriceRequestDto;
 import com.inditex.germanheinz.demo.service.PriceService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +29,8 @@ public class PriceController implements PriceControllerApi {
     }
 
     @Override
-    public ResponseEntity<PriceDto> savePrice(List<@Valid PriceDto> priceDto) {
-        return PriceControllerApi.super.savePrice(priceDto);
-    }
-
-    @Override
-    public ResponseEntity<List<PriceDto>> getPrices() {
-        logger.info("Get Prices init");
-        return ResponseEntity.ok(priceService.getPrices());
+    public ResponseEntity<List<PriceDto>> getPrices(PriceRequestDto priceRequestDto) {
+        logger.info("API - Get Prices init with Price Request {}", priceRequestDto.toString());
+        return ResponseEntity.ok(priceService.getPrices(priceRequestDto));
     }
 }

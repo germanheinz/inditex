@@ -5,6 +5,12 @@ price-list:
     operationId: getPrices
     tags:
       - price-controller
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../model/price-models.yml#/components/schemas/PriceRequestDto'
     responses:
       '200':
         description: List of prices

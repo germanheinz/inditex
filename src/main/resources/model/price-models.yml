@@ -40,3 +40,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PriceDto'
+
+    PriceRequestDto:
+      type: object
+      properties:
+        brandId:
+          type: string
+        date:
+          type: string
+        productId:
+          type: integer
+      required:
+        - brandId
+        - productId
+        - startDate
