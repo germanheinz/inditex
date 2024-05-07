@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: mango
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  sql:
+    init:
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:init-data.sql
+      mode: embedded
+      
+logging:
+  level:
+    root: INFO
+
+server:
+  port:
+    8082

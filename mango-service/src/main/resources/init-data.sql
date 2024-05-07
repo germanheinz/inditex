@@ -1,0 +1,1 @@
+INSERT INTO mango (name, quantity) VALUES ('MANGO', '1'), ('Otra marca', '2');

@@ -1,0 +1,23 @@
+components:
+  schemas:
+    ###################################
+    ### GENERIC SCHEMAS
+    ###################################
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          example: 500
+        message:
+          type: string
+          example: "There was an internal server error. Please try again"
+
+    securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT

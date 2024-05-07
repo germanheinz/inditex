@@ -20,8 +20,8 @@ public class PriceServiceImpl implements PriceService {
 
     static Logger logger = LoggerFactory.getLogger(PriceServiceImpl.class);
 
-    private PriceRepository priceRepository;
-    private PriceMapper priceMapper;
+    private final PriceRepository priceRepository;
+    private final PriceMapper priceMapper;
 
     public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper) {
         this.priceRepository = priceRepository;

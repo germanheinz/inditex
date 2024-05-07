@@ -1,0 +1,19 @@
+components:
+  schemas:
+    MangoDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        quantity:
+          type: string
+      required:
+        - id
+
+    MangoListDto:
+      type: array
+      items:
+        $ref: '#/components/schemas/MangoDto'

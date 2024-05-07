@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  description: Mango APIs
+  title: Mango Api
+  version: 0.0.1
+tags:
+  - name: mango-controller
+    description: \uD83C\uDF31 Mango Test
+
+paths:
+  /api/price:
+    $ref: './mango-apis.yml#/mango-list'
+
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
