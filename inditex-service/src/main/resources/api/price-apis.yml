@@ -1,0 +1,70 @@
+price-list:
+  get:
+    summary: Get all Prices
+    description: Get all Prices
+    operationId: getPrices
+    tags:
+      - price-controller
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../model/price-models.yml#/components/schemas/PriceRequestDto'
+    responses:
+      '200':
+        description: List of prices
+        content:
+          application/json:
+            schema:
+              $ref: '../model/price-models.yml#/components/schemas/PriceListDto'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '../model/generic-models.yml#/components/schemas/Error'
+      '404':
+        description: Not found
+        content:
+          application/json:
+            schema:
+              $ref: '../model/generic-models.yml#/components/schemas/Error'
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: '../model/generic-models.yml#/components/schemas/Error'
+price:
+  post:
+    summary: Creates a new price
+    description: Creates a new price
+    operationId: savePrice
+    tags:
+      - price-controller
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../model/price-models.yml#/components/schemas/PriceListDto'
+    responses:
+      '200':
+        description: Transfer
+        content:
+          application/json:
+            schema:
+              $ref: '../model/price-models.yml#/components/schemas/PriceDto'
+      '404':
+        description: Not found
+        content:
+          application/json:
+            schema:
+              $ref: '../model/generic-models.yml#/components/schemas/Error'
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: '../model/generic-models.yml#/components/schemas/Error'

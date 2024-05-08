@@ -5,6 +5,8 @@
 	<modules>
 		<module>inditex-service</module>
 		<module>mango-service</module>
+		<module>kafka-service</module>
+		<module>kafka-config</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
