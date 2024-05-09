@@ -10,8 +10,7 @@
     </parent>
 
     <groupId>org.example</groupId>
-    <artifactId>kafka-consumer</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>kafka-config</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,11 +18,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.microservices.demo</groupId>-->
-<!--            <artifactId>twitter-to-kafka-config</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -45,9 +39,13 @@
             <version>5.3.7</version>
         </dependency>
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>kafka-config</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>3.2.5</version>
         </dependency>
     </dependencies>
 </project>
