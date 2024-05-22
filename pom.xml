@@ -5,6 +5,7 @@
 	<modules>
 		<module>inditex-service</module>
 		<module>mango-service</module>
+<!--		<module>app-config-data</module>-->
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
