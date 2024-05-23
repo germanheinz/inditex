@@ -28,9 +28,9 @@ public class KafkaProducerImpl implements KafkaProducer<Long, InditexAvroModel> 
     @Override
     public void send(String topicName, Long key, InditexAvroModel message) {
         LOG.info("Sending message='{}' to topic='{}'", message, topicName);
-//        ListenableFuture<SendResult<Long, InditexAvroModel>> kafkaResultFuture =
-//                kafkaTemplate.send(topicName, key, message);
-//        addCallback(topicName, message, kafkaResultFuture);
+        ListenableFuture<SendResult<Long, InditexAvroModel>> kafkaResultFuture =
+                kafkaTemplate.send(topicName, key, message);
+        addCallback(topicName, message, kafkaResultFuture);
     }
 
     @PreDestroy

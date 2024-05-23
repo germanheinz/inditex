@@ -8,7 +8,7 @@
     </parent>
     <artifactId>kafka</artifactId>
     <packaging>pom</packaging>
-    <name>Archetype - kafka</name>
+    <name>kafka-service</name>
     <url>http://maven.apache.org</url>
     <version>0.0.1-SNAPSHOT</version>
     <modules>

@@ -99,7 +99,18 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<name>${project.groupId}/twitter.to.kafka.service:${project.version}</name>
+					</image>
 				</configuration>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>build-image</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -135,9 +146,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>
-								${project.basedir}/src/main/resources/api/apis.yml
-							</inputSpec>
+							<inputSpec>${project.basedir}/src/main/resources/api/apis.yml</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.inditex.germanheinz.demo.api</apiPackage>
 							<modelPackage>com.inditex.germanheinz.demo.model</modelPackage>
