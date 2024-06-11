@@ -16,6 +16,12 @@
 		<java.version>17</java.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>confluent</id>
+			<url>https://packages.confluent.io/maven/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,17 +77,45 @@
 		</dependency>
 		<dependency>
 			<groupId>org.example</groupId>
-			<artifactId>kafka-admin</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.example</groupId>
 			<artifactId>kafka-producer</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.example</groupId>
 			<artifactId>app-config-data</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- Spring Kafka -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+
+		<!-- Confluent Kafka Avro Serializer/Deserializer -->
+		<dependency>
+			<groupId>io.confluent</groupId>
+			<artifactId>kafka-avro-serializer</artifactId>
+			<version>7.3.0</version>
+		</dependency>
+
+		<!-- Avro -->
+		<dependency>
+			<groupId>org.apache.avro</groupId>
+			<artifactId>avro</artifactId>
+			<version>1.11.1</version>
+		</dependency>
+
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.example</groupId>
+			<artifactId>kafka-admin</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
@@ -148,8 +182,8 @@
 						<configuration>
 							<inputSpec>${project.basedir}/src/main/resources/api/apis.yml</inputSpec>
 							<generatorName>spring</generatorName>
-							<apiPackage>com.inditex.germanheinz.demo.api</apiPackage>
-							<modelPackage>com.inditex.germanheinz.demo.model</modelPackage>
+							<apiPackage>com.inditex.germanheinz.api</apiPackage>
+							<modelPackage>com.inditex.germanheinz.model</modelPackage>
 							<typeMappings>
 								<typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
 							</typeMappings>

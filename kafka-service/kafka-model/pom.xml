@@ -25,6 +25,13 @@
             <artifactId>avro</artifactId>
             <version>1.11.1</version>
         </dependency>
+
+        <!-- Confluent Kafka Avro Serializer/Deserializer -->
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>7.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>

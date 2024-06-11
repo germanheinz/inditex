@@ -3,11 +3,9 @@
  *
  * DO NOT EDIT DIRECTLY
  */
-package com.inditex.germanheinz.kafka.order.avro.model;
+package com.inditex.germanheinz;
 
-import org.apache.avro.generic.GenericArray;
 import org.apache.avro.specific.SpecificData;
-import org.apache.avro.util.Utf8;
 import org.apache.avro.message.BinaryMessageEncoder;
 import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
@@ -219,8 +217,8 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
    * Creates a new InditexAvroModel RecordBuilder.
    * @return A new InditexAvroModel RecordBuilder
    */
-  public static com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder newBuilder() {
-    return new com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder();
+  public static InditexAvroModel.Builder newBuilder() {
+    return new InditexAvroModel.Builder();
   }
 
   /**
@@ -228,11 +226,11 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
    * @param other The existing builder to copy.
    * @return A new InditexAvroModel RecordBuilder
    */
-  public static com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder newBuilder(com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder other) {
+  public static InditexAvroModel.Builder newBuilder(InditexAvroModel.Builder other) {
     if (other == null) {
-      return new com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder();
+      return new InditexAvroModel.Builder();
     } else {
-      return new com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder(other);
+      return new InditexAvroModel.Builder(other);
     }
   }
 
@@ -241,11 +239,11 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
    * @param other The existing instance to copy.
    * @return A new InditexAvroModel RecordBuilder
    */
-  public static com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder newBuilder(com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel other) {
+  public static InditexAvroModel.Builder newBuilder(InditexAvroModel other) {
     if (other == null) {
-      return new com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder();
+      return new InditexAvroModel.Builder();
     } else {
-      return new com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder(other);
+      return new InditexAvroModel.Builder(other);
     }
   }
 
@@ -270,7 +268,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder other) {
+    private Builder(InditexAvroModel.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -294,7 +292,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
      * Creates a Builder by copying an existing InditexAvroModel instance
      * @param other The existing instance to copy.
      */
-    private Builder(com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel other) {
+    private Builder(InditexAvroModel other) {
       super(SCHEMA$, MODEL$);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -328,7 +326,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder setId(java.util.UUID value) {
+    public InditexAvroModel.Builder setId(java.util.UUID value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -348,7 +346,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder clearId() {
+    public InditexAvroModel.Builder clearId() {
       id = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -368,7 +366,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'productId'.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder setProductId(java.lang.String value) {
+    public InditexAvroModel.Builder setProductId(java.lang.String value) {
       validate(fields()[1], value);
       this.productId = value;
       fieldSetFlags()[1] = true;
@@ -388,7 +386,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'productId' field.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder clearProductId() {
+    public InditexAvroModel.Builder clearProductId() {
       productId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -408,7 +406,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'brand'.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder setBrand(java.lang.String value) {
+    public InditexAvroModel.Builder setBrand(java.lang.String value) {
       validate(fields()[2], value);
       this.brand = value;
       fieldSetFlags()[2] = true;
@@ -428,7 +426,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'brand' field.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder clearBrand() {
+    public InditexAvroModel.Builder clearBrand() {
       brand = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -448,7 +446,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * @param value The value of 'priority'.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder setPriority(java.lang.String value) {
+    public InditexAvroModel.Builder setPriority(java.lang.String value) {
       validate(fields()[3], value);
       this.priority = value;
       fieldSetFlags()[3] = true;
@@ -468,7 +466,7 @@ public class InditexAvroModel extends org.apache.avro.specific.SpecificRecordBas
       * Clears the value of the 'priority' field.
       * @return This builder.
       */
-    public com.inditex.germanheinz.kafka.order.avro.model.InditexAvroModel.Builder clearPriority() {
+    public InditexAvroModel.Builder clearPriority() {
       priority = null;
       fieldSetFlags()[3] = false;
       return this;

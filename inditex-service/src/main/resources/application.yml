@@ -19,10 +19,13 @@ spring:
       schema-locations: classpath:schema.sql
       data-locations: classpath:init-data.sql
       mode: embedded
-      
-logging:
-  level:
-    root: INFO
+
+
+#  main:
+#    allow-bean-definition-overriding: true
+  logging:
+    level:
+      root: INFO
 
 server:
   port:
@@ -44,7 +47,7 @@ retry-config:
   initial-interval-ms: 1000
   max-interval-ms: 10000
   multiplier: 2.0
-  maxAttempts: 3
+  maxAttempts: 5
   sleep-time-ms: 2000
 
 kafka-config:
@@ -58,7 +61,7 @@ kafka-config:
   replication-factor: 3
 
 kafka-producer-config:
-  key-serializer-class: org.apache.kafka.common.serialization.LongSerializer
+  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
   value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
   compression-type: snappy
   acks: all

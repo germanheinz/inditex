@@ -11,19 +11,19 @@
       }
     },
     {
-      "name": "username",
+      "name": "productId",
       "type": {
         "type": "string"
       }
     },
     {
-      "name": "firstName",
+      "name": "brand",
       "type": {
         "type": "string"
       }
     },
     {
-      "name": "lastName",
+      "name": "priority",
       "type": {
         "type": "string"
       }
