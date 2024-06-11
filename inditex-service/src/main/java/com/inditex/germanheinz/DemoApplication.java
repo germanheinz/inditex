@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.inditex.germanheinz.repository")
 @EntityScan(basePackages = {"com.inditex.germanheinz.entity"})
-@ComponentScan({"com.inditex.germanheinz","com.inditex.germanheinz.service","com.inditex.germanheinz.service.impl"})
+@ComponentScan("com.inditex.germanheinz")
 public class DemoApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(DemoApplication.class);
