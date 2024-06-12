@@ -17,7 +17,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class KafkaProducerImpl implements KafkaProducer<Long, InditexAvroModel> {
+public class KafkaProducerImpl implements KafkaProducer<String, InditexAvroModel> {
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaProducerImpl.class);
 
@@ -31,7 +31,7 @@ public class KafkaProducerImpl implements KafkaProducer<Long, InditexAvroModel> 
     }
 
     @Override
-    public void send(String topicName, Long key, InditexAvroModel message) {
+    public void send(String topicName, String key, InditexAvroModel message) {
         LOG.info("Sending message='{}' to topic='{}'", message, topicName);
         CompletableFuture<SendResult<String, InditexAvroModel>> kafkaResponse = kafkaTemplate.send(topicName, message.getId().toString(), message);
         getKafkaCallback(kafkaConfigData.getTopicName(), InditexAvroModel.class, "1", "InditexAvroModel");

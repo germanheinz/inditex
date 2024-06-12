@@ -29,10 +29,10 @@ public class PriceServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
     private final PriceMapper priceMapper;
 
-    private final KafkaProducer<Long, InditexAvroModel> kafkaProducer;
+    private final KafkaProducer<String, InditexAvroModel> kafkaProducer;
     private final KafkaConfigData kafkaConfigData;
 
-    public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper, KafkaProducer<Long, InditexAvroModel> kafkaProducer, KafkaConfigData kafkaConfigData) {
+    public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper, KafkaProducer<String, InditexAvroModel> kafkaProducer, KafkaConfigData kafkaConfigData) {
         this.priceRepository = priceRepository;
         this.priceMapper = priceMapper;
         this.kafkaProducer = kafkaProducer;
@@ -68,7 +68,7 @@ public class PriceServiceImpl implements PriceService {
         if (!inditexAvro.isEmpty()){
             inditexAvro.forEach(avroModel -> {
                 logger.info("Prices for sending to Mango, {}", filteredPrices);
-                kafkaProducer.send(kafkaConfigData.getTopicName(), Long.parseLong(avroModel.getId().toString()), avroModel);
+                kafkaProducer.send(kafkaConfigData.getTopicName(), avroModel.getId().toString(), avroModel);
             });
         }
 
