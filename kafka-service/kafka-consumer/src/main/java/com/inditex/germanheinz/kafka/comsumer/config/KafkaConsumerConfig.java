@@ -1,7 +1,8 @@
 package com.inditex.germanheinz.kafka.comsumer.config;
 
-import com.inditex.germanheinz.config.KafkaConfigData;
-import com.inditex.germanheinz.config.KafkaConsumerConfigData;
+
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
+import com.inditex.germanheinz.kafka.config.KafkaConsumerConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.context.annotation.Bean;

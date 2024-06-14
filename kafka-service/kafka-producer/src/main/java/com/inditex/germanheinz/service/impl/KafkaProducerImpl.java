@@ -2,7 +2,7 @@ package com.inditex.germanheinz.service.impl;
 
 
 import com.inditex.germanheinz.InditexAvroModel;
-import com.inditex.germanheinz.config.KafkaConfigData;
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import com.inditex.germanheinz.service.KafkaProducer;
 import jakarta.annotation.PreDestroy;
 
@@ -33,8 +33,8 @@ public class KafkaProducerImpl implements KafkaProducer<String, InditexAvroModel
     @Override
     public void send(String topicName, String key, InditexAvroModel message) {
         LOG.info("Sending message='{}' to topic='{}'", message, topicName);
-        CompletableFuture<SendResult<String, InditexAvroModel>> kafkaResponse = kafkaTemplate.send(topicName, message.getId().toString(), message);
-        getKafkaCallback(kafkaConfigData.getTopicName(), InditexAvroModel.class, "1", "InditexAvroModel");
+        CompletableFuture<SendResult<String, InditexAvroModel>> kafkaResponse = kafkaTemplate.send(topicName, key, message);
+        getKafkaCallback(kafkaConfigData.getTopicName(), InditexAvroModel.class, key, "InditexAvroModel");
         LOG.info("Producer Response message='{}' to topic='{}'", kafkaResponse, topicName);
     }
 

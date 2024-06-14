@@ -1,9 +1,9 @@
 package com.inditex.germanheinz.init.impl;
 
 
-import com.inditex.germanheinz.config.KafkaConfigData;
 import com.inditex.germanheinz.init.StreamInitializer;
 import com.inditex.germanheinz.client.KafkaAdminClient;
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

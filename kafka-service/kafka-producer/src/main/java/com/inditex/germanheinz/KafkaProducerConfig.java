@@ -1,7 +1,8 @@
 package com.inditex.germanheinz;
 
-import com.inditex.germanheinz.config.KafkaConfigData;
-import com.inditex.germanheinz.config.KafkaProducerConfigData;
+
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
+import com.inditex.germanheinz.kafka.config.KafkaProducerConfigData;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;

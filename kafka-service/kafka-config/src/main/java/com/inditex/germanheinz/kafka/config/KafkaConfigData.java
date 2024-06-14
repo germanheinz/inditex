@@ -1,4 +1,4 @@
-package com.inditex.germanheinz.config;
+package com.inditex.germanheinz.kafka.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

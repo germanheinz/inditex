@@ -1,8 +1,8 @@
 package com.inditex.germanheinz.service.impl;
 
 import com.inditex.germanheinz.InditexAvroModel;
-import com.inditex.germanheinz.config.KafkaConfigData;
 import com.inditex.germanheinz.entity.Price;
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import com.inditex.germanheinz.mapper.PriceMapper;
 import com.inditex.germanheinz.model.PriceDto;
 import com.inditex.germanheinz.model.PriceRequestDto;
@@ -11,7 +11,6 @@ import com.inditex.germanheinz.service.KafkaProducer;
 import com.inditex.germanheinz.service.PriceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class PriceServiceImpl implements PriceService {
 
-    public static final String MANGO = "mango";
+    public static final String ZARA = "ZARA";
     static Logger logger = LoggerFactory.getLogger(PriceServiceImpl.class);
 
     private final PriceRepository priceRepository;
@@ -49,7 +48,7 @@ public class PriceServiceImpl implements PriceService {
         logger.info("Prices {}", prices.toString());
 
         List<Price> filteredPrices = prices.stream()
-                .filter(price -> MANGO.equalsIgnoreCase(price.getBrand().toString()))
+                .filter(price -> ZARA.equalsIgnoreCase(price.getBrand().getName()))
                 .toList();
 
         logger.info("Filtered Prices brand Mango, {}", filteredPrices);
@@ -57,7 +56,7 @@ public class PriceServiceImpl implements PriceService {
         List<InditexAvroModel> inditexAvro = filteredPrices.stream()
                 .map(price -> {
                     InditexAvroModel inditexAvroModel = new InditexAvroModel();
-                    inditexAvroModel.setId(UUID.fromString(String.valueOf(price.getId()))); // Asegúrate de que getId() retorna un valor compatible con UUID
+                    inditexAvroModel.setId(UUID.randomUUID()); // Asegúrate de que getId() retorna un valor compatible con UUID
                     inditexAvroModel.setBrand(price.getBrand().toString());
                     inditexAvroModel.setPriority(price.getPriority().toString());
                     inditexAvroModel.setProductId(price.getProductId().toString());

@@ -1,8 +1,8 @@
 package com.inditex.germanheinz.client;
 
-import com.inditex.germanheinz.config.KafkaConfigData;
 import com.inditex.germanheinz.config.RetryConfigData;
 import com.inditex.germanheinz.exception.KafkaClientException;
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;

@@ -1,6 +1,6 @@
 package com.inditex.germanheinz.config;
 
-import com.inditex.germanheinz.config.KafkaConfigData;
+import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.springframework.context.annotation.Bean;
