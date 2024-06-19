@@ -1,6 +1,8 @@
 package com.inditex.germanheinz.service.impl;
 
 import com.inditex.germanheinz.InditexAvroModel;
+import com.inditex.germanheinz.KafkaMessageHelper;
+import com.inditex.germanheinz.config.InditexServiceConfigData;
 import com.inditex.germanheinz.entity.Price;
 import com.inditex.germanheinz.kafka.config.KafkaConfigData;
 import com.inditex.germanheinz.mapper.PriceMapper;
@@ -28,14 +30,20 @@ public class PriceServiceImpl implements PriceService {
     private final PriceRepository priceRepository;
     private final PriceMapper priceMapper;
 
-    private final KafkaProducer<String, InditexAvroModel> kafkaProducer;
-    private final KafkaConfigData kafkaConfigData;
+    private final InditexServiceConfigData inditexServiceConfigData;
 
-    public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper, KafkaProducer<String, InditexAvroModel> kafkaProducer, KafkaConfigData kafkaConfigData) {
+    private final KafkaConfigData kafkaConfigData;
+    private final KafkaProducer<String, InditexAvroModel> kafkaProducer;
+
+    private final KafkaMessageHelper kafkaMessageHelper;
+
+    public PriceServiceImpl(PriceRepository priceRepository, PriceMapper priceMapper, InditexServiceConfigData inditexServiceConfigData, KafkaProducer<String, InditexAvroModel> kafkaProducer, KafkaConfigData kafkaConfigData, KafkaMessageHelper kafkaMessageHelper) {
         this.priceRepository = priceRepository;
         this.priceMapper = priceMapper;
+        this.inditexServiceConfigData = inditexServiceConfigData;
         this.kafkaProducer = kafkaProducer;
         this.kafkaConfigData = kafkaConfigData;
+        this.kafkaMessageHelper = kafkaMessageHelper;
     }
 
     @Override
@@ -52,10 +60,10 @@ public class PriceServiceImpl implements PriceService {
                 .toList();
 
         logger.info("Filtered Prices brand Mango, {}", filteredPrices);
-
+        InditexAvroModel inditexAvroModel = new InditexAvroModel();
         List<InditexAvroModel> inditexAvro = filteredPrices.stream()
                 .map(price -> {
-                    InditexAvroModel inditexAvroModel = new InditexAvroModel();
+
                     inditexAvroModel.setId(UUID.randomUUID()); // Asegúrate de que getId() retorna un valor compatible con UUID
                     inditexAvroModel.setBrand(price.getBrand().toString());
                     inditexAvroModel.setPriority(price.getPriority().toString());
@@ -67,9 +75,23 @@ public class PriceServiceImpl implements PriceService {
         if (!inditexAvro.isEmpty()){
             inditexAvro.forEach(avroModel -> {
                 logger.info("Prices for sending to Mango, {}", filteredPrices);
-                kafkaProducer.send(kafkaConfigData.getTopicName(), avroModel.getId().toString(), avroModel);
+
+                kafkaProducer.send(
+                        inditexServiceConfigData.getInditexRequestTopicName(),
+                        avroModel.getId().toString(),
+                        avroModel,
+                        kafkaMessageHelper.getKafkaCallback(
+                                inditexServiceConfigData.getInditexRequestTopicName(),
+                                avroModel,
+                                (o, outboxStatus) -> {},
+                                avroModel.getId().toString(),
+                                "InditexAvroModel")
+                );
+
             });
         }
+
+
 
         return priceMapper.pricesToPricesDto(prices);
     }

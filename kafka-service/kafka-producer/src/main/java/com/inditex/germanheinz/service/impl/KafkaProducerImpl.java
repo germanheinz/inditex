@@ -1,68 +1,48 @@
+
 package com.inditex.germanheinz.service.impl;
 
-
-import com.inditex.germanheinz.InditexAvroModel;
-import com.inditex.germanheinz.kafka.config.KafkaConfigData;
+import com.inditex.germanheinz.exception.KafkaProducerException;
 import com.inditex.germanheinz.service.KafkaProducer;
-import jakarta.annotation.PreDestroy;
-
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.avro.specific.SpecificRecordBase;
+import org.springframework.kafka.KafkaException;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
-import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+import org.springframework.stereotype.Component;
 
+import jakarta.annotation.PreDestroy;
+import java.io.Serializable;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
-@Service
-public class KafkaProducerImpl implements KafkaProducer<String, InditexAvroModel> {
+@Slf4j
+@Component
+public class KafkaProducerImpl<K extends Serializable, V extends SpecificRecordBase> implements KafkaProducer<K, V> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaProducerImpl.class);
+    private final KafkaTemplate<K, V> kafkaTemplate;
 
-    private final KafkaConfigData kafkaConfigData;
-
-    private final KafkaTemplate<String, InditexAvroModel> kafkaTemplate;
-
-    public KafkaProducerImpl(KafkaConfigData kafkaConfigData, KafkaTemplate<String, InditexAvroModel> kafkaTemplate) {
-        this.kafkaConfigData = kafkaConfigData;
+    public KafkaProducerImpl(KafkaTemplate<K, V> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
-    public void send(String topicName, String key, InditexAvroModel message) {
-        LOG.info("Sending message='{}' to topic='{}'", message, topicName);
-        CompletableFuture<SendResult<String, InditexAvroModel>> kafkaResponse = kafkaTemplate.send(topicName, key, message);
-        getKafkaCallback(kafkaConfigData.getTopicName(), InditexAvroModel.class, key, "InditexAvroModel");
-        LOG.info("Producer Response message='{}' to topic='{}'", kafkaResponse, topicName);
+    public void send(String topicName, K key, V message, BiConsumer<SendResult<K, V>, Throwable> callback) {
+        log.info("Sending message={} to topic={}", message, topicName);
+        try {
+            CompletableFuture<SendResult<K, V>> kafkaResultFuture = kafkaTemplate.send(topicName, key, message);
+            kafkaResultFuture.whenComplete(callback);
+        } catch (KafkaException e) {
+            log.error("Error on kafka producer with key: {}, message: {} and exception: {}", key, message,
+                    e.getMessage());
+            throw new KafkaProducerException("Error on kafka producer with key: " + key + " and message: " + message);
+        }
     }
 
     @PreDestroy
     public void close() {
         if (kafkaTemplate != null) {
-            LOG.info("Closing kafka producer!");
+            log.info("Closing kafka producer!");
             kafkaTemplate.destroy();
         }
-    }
-    public <T, U> ListenableFutureCallback<SendResult<String, T>> getKafkaCallback(String responseTopicName, T avroModel, String id, String avroModelName) {
-        return new ListenableFutureCallback<SendResult<String, T>>() {
-            @Override
-            public void onFailure(Throwable ex) {
-                LOG.error("Error while sending {} with message: {} to topic {}",
-                        avroModelName, avroModel.toString(), responseTopicName, ex);
-            }
-
-            @Override
-            public void onSuccess(SendResult<String, T> result) {
-                RecordMetadata metadata = result.getRecordMetadata();
-                LOG.info("Received successful response from Kafka" +
-                                " Topic: {} Partition: {} Offset: {} Timestamp: {}",
-                        metadata.topic(),
-                        metadata.partition(),
-                        metadata.offset(),
-                        metadata.timestamp());
-            }
-        };
     }
 }

@@ -70,3 +70,8 @@ kafka-producer-config:
   linger-ms: 5
   request-timeout-ms: 60000
   retry-count: 5
+
+
+inditex-kafka-service:
+  inditex-request-topic-name: twitter-topic
+  inditex-response-topic-name: twitter-topic
